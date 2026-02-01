@@ -12,7 +12,6 @@ import (
 func main() {
 	app := fx.New(
 		database.Module,
-		database.MigrationModule,
 
 		http.Module,
 
