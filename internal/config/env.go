@@ -42,6 +42,14 @@ type Env struct {
 	REDIS_ADDR string `validate:"hostname_port"`
 	REDIS_USER string
 	REDIS_PASS string
+
+	// STORAGE
+	STORAGE_ENDPOINT   string `validate:"min=1"`
+	STORAGE_REGION     string `validate:"min=1"`
+	STORAGE_BUCKET     string `validate:"min=1"`
+	STORAGE_ACCESS_KEY string `validate:"required,min=1"`
+	STORAGE_SECRET_KEY string `validate:"required,min=1"`
+	STORAGE_PATH_STYLE bool   `validate:"boolean"`
 }
 
 func newEnv() *Env {
@@ -56,6 +64,13 @@ func newEnv() *Env {
 		REDIS_ADDR: getenv("REDIS_ADDR", "localhost:6379"),
 		REDIS_USER: getenv("REDIS_USER", ""),
 		REDIS_PASS: getenv("REDIS_PASS", ""),
+
+		STORAGE_ENDPOINT:   getenv("STORAGE_ENDPOINT", "http://localhost:9000"),
+		STORAGE_REGION:     getenv("STORAGE_REGION", "us-east-1"),
+		STORAGE_BUCKET:     getenv("STORAGE_BUCKET", "files"),
+		STORAGE_ACCESS_KEY: getenv("STORAGE_ACCESS_KEY", "minio"),
+		STORAGE_SECRET_KEY: getenv("STORAGE_SECRET_KEY", "adminadmin"),
+		STORAGE_PATH_STYLE: getenv("STORAGE_PATH_STYLE", "true") == "true",
 	}
 
 	validateEnv(env)
