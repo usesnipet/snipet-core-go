@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/usesnipet/snipet-core-go/internal/infra/database"
 	"github.com/usesnipet/snipet-core-go/internal/infra/http"
+	"github.com/usesnipet/snipet-core-go/internal/infra/queue"
 	"github.com/usesnipet/snipet-core-go/internal/modules/knowledge"
 	"go.uber.org/fx"
 )
@@ -16,6 +17,8 @@ func main() {
 		http.Module,
 
 		knowledge.Module,
+
+		queue.Module,
 
 		fx.Invoke(func(
 			engine *gin.Engine,
