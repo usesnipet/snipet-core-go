@@ -1,12 +1,12 @@
 package http
 
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/go-chi/chi/v5"
 	"go.uber.org/fx"
 )
 
 type Controller interface {
-	RegisterRoutes(group *gin.RouterGroup)
+	RegisterRoutes(r chi.Router)
 }
 
 type ControllersIn struct {

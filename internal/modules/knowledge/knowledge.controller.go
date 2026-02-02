@@ -1,6 +1,10 @@
 package knowledge
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/go-chi/chi/v5"
+)
 
 type Controller struct {
 	service Service
@@ -10,11 +14,12 @@ func NewController(service Service) *Controller {
 	return &Controller{service}
 }
 
-func (c *Controller) RegisterRoutes(rg *gin.RouterGroup) {
-	knowledges := rg.Group("/knowledge")
-	knowledges.GET("", c.list)
+func (c *Controller) RegisterRoutes(r chi.Router) {
+	r.Route("/knowledge", func(r chi.Router) {
+		r.Get("/", c.list)
+	})
 }
 
-func (c *Controller) list(ctx *gin.Context) {
-	ctx.JSON(200, []string{"a", "b", "c"})
+func (c *Controller) list(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("test"))
 }

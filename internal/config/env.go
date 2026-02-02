@@ -30,6 +30,9 @@ func validateEnv(env *Env) {
 }
 
 type Env struct {
+	// APP
+	APP_PORT string
+
 	// DATABASE
 	DB_NAME string `validate:"min=1"`
 	DB_USER string `validate:"min=1"`
@@ -54,12 +57,13 @@ type Env struct {
 
 func newEnv() *Env {
 	env := &Env{
-		DB_NAME: getenv("DB_NAME", "snipet_core_go"),
-		DB_USER: getenv("DB_USER", "postgres"),
-		DB_PASS: getenv("DB_PASS", "postgres"),
-		DB_HOST: getenv("DB_HOST", "localhost"),
-		DB_PORT: getenv("DB_PORT", "5432"),
-		DB_SSL:  getenv("DB_SSL", "disable"),
+		APP_PORT: getenv("APP_PORT", ":8852"),
+		DB_NAME:  getenv("DB_NAME", "snipet_core_go"),
+		DB_USER:  getenv("DB_USER", "postgres"),
+		DB_PASS:  getenv("DB_PASS", "postgres"),
+		DB_HOST:  getenv("DB_HOST", "localhost"),
+		DB_PORT:  getenv("DB_PORT", "5432"),
+		DB_SSL:   getenv("DB_SSL", "disable"),
 
 		REDIS_ADDR: getenv("REDIS_ADDR", "localhost:6379"),
 		REDIS_USER: getenv("REDIS_USER", ""),
