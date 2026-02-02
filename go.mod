@@ -12,6 +12,7 @@ require (
 	github.com/hibiken/asynq v0.25.1
 	github.com/lib/pq v1.11.1
 	go.uber.org/fx v1.24.0
+	gorm.io/datatypes v1.2.6
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/gorm v1.31.1
 )
@@ -128,7 +129,7 @@ require (
 	google.golang.org/protobuf v1.36.11 // indirect
 	gorm.io/driver/mysql v1.5.7 // indirect
 	gorm.io/driver/sqlite v1.6.0 // indirect
-	gorm.io/driver/sqlserver v1.5.4 // indirect
+	gorm.io/driver/sqlserver v1.6.0 // indirect
 )
 
 tool github.com/air-verse/air
