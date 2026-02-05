@@ -2,6 +2,7 @@ package http_server
 
 import (
 	"context"
+	"net"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -40,7 +41,17 @@ var Module = fx.Module(
 
 		lc.Append(fx.Hook{
 			OnStart: func(ctx context.Context) error {
-				go server.ListenAndServe()
+				ln, err := net.Listen("tcp", server.Addr)
+				if err != nil {
+					// If we can't bind the port (e.g. already in use),
+					// fail startup so Fx reports the error.
+					return err
+				}
+
+				go func() {
+					_ = server.Serve(ln)
+				}()
+
 				return nil
 			},
 			OnStop: func(ctx context.Context) error {
