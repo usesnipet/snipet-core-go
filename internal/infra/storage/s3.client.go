@@ -23,7 +23,6 @@ func NewS3Client() (*s3.Client, error) {
 			),
 		),
 		config.WithBaseEndpoint(env.STORAGE_ENDPOINT),
-		config.WithRegion(env.STORAGE_REGION),
 	)
 	if err != nil {
 		return nil, err
