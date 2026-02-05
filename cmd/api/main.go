@@ -3,9 +3,12 @@ package main
 import (
 	_ "ariga.io/atlas-provider-gorm/gormschema"
 	"github.com/usesnipet/snipet-core-go/internal/infra/database"
-	"github.com/usesnipet/snipet-core-go/internal/infra/http"
+	http_server "github.com/usesnipet/snipet-core-go/internal/infra/http-server"
 	"github.com/usesnipet/snipet-core-go/internal/infra/queue"
-	"github.com/usesnipet/snipet-core-go/internal/modules/knowledge"
+	"github.com/usesnipet/snipet-core-go/internal/infra/storage"
+	knowledge_source "github.com/usesnipet/snipet-core-go/internal/modules/knowledge-source"
+	"github.com/usesnipet/snipet-core-go/internal/modules/registry"
+	"github.com/usesnipet/snipet-core-go/internal/service"
 	"go.uber.org/fx"
 )
 
@@ -14,12 +17,16 @@ func main() {
 		// INFRA
 		database.Module,
 		queue.Module,
+		storage.Module,
+
+		service.Module,
 
 		// MODULES
-		knowledge.Module,
+		knowledge_source.Module,
+		registry.Module,
 
 		// HTTP
-		http.Module,
+		http_server.Module,
 	)
 	app.Run()
 }

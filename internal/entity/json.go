@@ -1,4 +1,4 @@
-package entities
+package entity
 
 import (
 	"database/sql/driver"
@@ -9,14 +9,14 @@ import (
 
 type JSONMap = datatypes.JSONMap
 
-type EncryptedJSON map[string]interface{}
+type EncryptedJSON map[string]any
 
 func (e EncryptedJSON) Value() (driver.Value, error) {
 	// TODO: encrypt before saving
 	return json.Marshal(e)
 }
 
-func (e *EncryptedJSON) Scan(value interface{}) error {
+func (e *EncryptedJSON) Scan(value any) error {
 	// TODO: decrypt after reading
 	bytes, ok := value.([]byte)
 	if !ok {
