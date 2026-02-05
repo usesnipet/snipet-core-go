@@ -17,7 +17,6 @@ help:
 	@echo "  make run              Run app"
 	@echo "  make build            Build binary"
 	@echo "  make clean            Clean build artifacts"
-	@echo "  make db-create        Create database if not exists"
 	@echo "  make migrate          Apply migrations"
 	@echo "  make migrate-diff     Generate new migration"
 	@echo "  make migrate-status   Show migration status"
@@ -34,9 +33,6 @@ build:
 
 clean:
 	rm -rf bin tmp
-
-db-create:
-	go run ./cmd/tools/db-create
 
 migrate-diff:
 	atlas migrate diff $(name) --env $(ATLAS_ENV)
